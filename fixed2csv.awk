@@ -25,19 +25,19 @@ BEGIN {
     OFS=","
 }
 
-      {
-          gsub(/ /,"",$2)               # FIX NAME
-          gsub(/ /,"",$5)               # LATITUDE
-          gsub(/ /,"",$6)               # LONGITUDE
-          gsub(/ /,"",$15)              # ARTCC
-          N = substr($5,13,1)
-          LATD = substr($5,1,2)
-          LATM = substr($5,4,2)
-          LATS = round(substr($5,7,6))
-          W = substr($6,14,1)
-          LONGD = substr($6, 1, 3)
-          LONGM = substr($6, 5, 2)
-          LONGS = round(substr($6,8,6))
-          printf("%s,%s%02d %02d %02d,%s%d %02d %02d,%s\n", $2, N, LATD, LATM, LATS,
-                 W, LONGD, LONGM, LONGS, $15)
-      }
+$1 ~ /^FIX1/ {
+    gsub(/ /,"",$2)               # FIX NAME
+    gsub(/ /,"",$5)               # LATITUDE
+    gsub(/ /,"",$6)               # LONGITUDE
+    gsub(/ /,"",$15)              # ARTCC
+    N = substr($5,13,1)
+    LATD = substr($5,1,2)
+    LATM = substr($5,4,2)
+    LATS = round(substr($5,7,6))
+    W = substr($6,14,1)
+    LONGD = substr($6, 1, 3)
+    LONGM = substr($6, 5, 2)
+    LONGS = round(substr($6,8,6))
+    printf("%s,%s%02d %02d %02d,%s%d %02d %02d,%s\n", $2, N, LATD, LATM, LATS,
+           W, LONGD, LONGM, LONGS, $15)
+}
